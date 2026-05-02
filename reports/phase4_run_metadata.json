@@ -1,0 +1,53 @@
+{
+  "created_at_utc": "2026-05-02T12:13:27.909053+00:00",
+  "config": {
+    "raw_data_dir": "/Users/ayushkanyal/Desktop/Predictive Maintainence/data/raw",
+    "output_dir": "/Users/ayushkanyal/Desktop/Predictive Maintainence/reports",
+    "datasets": [
+      "FD001",
+      "FD002",
+      "FD003",
+      "FD004"
+    ],
+    "skip_missing": true,
+    "safe_mode": true,
+    "include_lstm": false,
+    "max_cpu_threads": 2,
+    "rul_cap": 125,
+    "validation_fraction": 0.2,
+    "random_state": 42,
+    "rolling_windows": [
+      5,
+      15,
+      30
+    ],
+    "lag_steps": [
+      1,
+      3,
+      5
+    ],
+    "sequence_length": 30,
+    "sequence_stride": 1,
+    "rf_n_estimators": 250,
+    "rf_n_jobs": 2,
+    "lstm_hidden_size": 128,
+    "lstm_num_layers": 2,
+    "lstm_dropout": 0.2,
+    "lstm_learning_rate": 0.001,
+    "lstm_batch_size": 128,
+    "lstm_epochs": 8,
+    "lstm_patience": 3,
+    "lstm_device": "cpu",
+    "log_to_mlflow": true,
+    "mlflow_tracking_uri": null,
+    "mlflow_experiment": "cmapss_phase4_multi_dataset",
+    "log_models": false
+  },
+  "available_datasets": [
+    "FD001",
+    "FD002",
+    "FD003",
+    "FD004"
+  ],
+  "missing_by_dataset": {}
+}

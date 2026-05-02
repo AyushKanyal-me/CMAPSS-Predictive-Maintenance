@@ -1,0 +1,14 @@
+.git/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+*.ipynb
+data/
+mlruns/
+notebooks/
+reports/
+docs/
+tests/

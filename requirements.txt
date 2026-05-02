@@ -1,0 +1,32 @@
+# Data Manipulation
+pandas
+numpy
+scipy
+
+# Machine Learning & Deep Learning
+torch
+torchvision
+torchaudio
+scikit-learn
+xgboost
+
+# MLOps & Experiment Tracking
+mlflow
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Utilities
+ipykernel
+tqdm
+python-dotenv
+pyarrow
+fastparquet
+pytest
+
+# API Deployment
+fastapi
+uvicorn
+pydantic

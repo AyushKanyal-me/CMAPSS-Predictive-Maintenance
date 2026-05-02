@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Test/coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+.DS_Store
+
+# Data and tracking artifacts
+data/raw/
+data/processed/
+mlruns/
+
+# Logs
+*.log

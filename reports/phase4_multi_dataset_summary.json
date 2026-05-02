@@ -1,0 +1,62 @@
+[
+  {
+    "dataset_id": "FD001",
+    "model": "random_forest",
+    "rmse": 16.663887862789544,
+    "mae": 11.737326226012794,
+    "nasa_score": 33564.9732455995,
+    "loss": null,
+    "best_epoch": null,
+    "train_units": 80,
+    "validation_units": 20,
+    "train_rows": 16379,
+    "validation_rows": 3752,
+    "train_sequence_samples": null,
+    "validation_sequence_samples": null
+  },
+  {
+    "dataset_id": "FD002",
+    "model": "random_forest",
+    "rmse": 19.594690195722908,
+    "mae": 15.050733102918585,
+    "nasa_score": 144504.91383696874,
+    "loss": null,
+    "best_epoch": null,
+    "train_units": 208,
+    "validation_units": 52,
+    "train_rows": 42043,
+    "validation_rows": 10416,
+    "train_sequence_samples": null,
+    "validation_sequence_samples": null
+  },
+  {
+    "dataset_id": "FD003",
+    "model": "random_forest",
+    "rmse": 13.328514545031744,
+    "mae": 8.783287285525738,
+    "nasa_score": 27589.471944202793,
+    "loss": null,
+    "best_epoch": null,
+    "train_units": 80,
+    "validation_units": 20,
+    "train_rows": 19674,
+    "validation_rows": 4546,
+    "train_sequence_samples": null,
+    "validation_sequence_samples": null
+  },
+  {
+    "dataset_id": "FD004",
+    "model": "random_forest",
+    "rmse": 20.162337254149104,
+    "mae": 14.250003912618194,
+    "nasa_score": 394994.36279436864,
+    "loss": null,
+    "best_epoch": null,
+    "train_units": 199,
+    "validation_units": 50,
+    "train_rows": 47736,
+    "validation_rows": 12268,
+    "train_sequence_samples": null,
+    "validation_sequence_samples": null
+  }
+]

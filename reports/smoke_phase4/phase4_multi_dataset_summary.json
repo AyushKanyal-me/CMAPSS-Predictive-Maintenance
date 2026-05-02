@@ -1,0 +1,17 @@
+[
+  {
+    "dataset_id": "FD001",
+    "model": "random_forest",
+    "rmse": 16.76465976881664,
+    "mae": 11.754557569296377,
+    "nasa_score": 35870.056056891524,
+    "loss": null,
+    "best_epoch": null,
+    "train_units": 80,
+    "validation_units": 20,
+    "train_rows": 16379,
+    "validation_rows": 3752,
+    "train_sequence_samples": null,
+    "validation_sequence_samples": null
+  }
+]

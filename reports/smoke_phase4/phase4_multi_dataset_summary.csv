@@ -1,0 +1,2 @@
+dataset_id,model,rmse,mae,nasa_score,loss,best_epoch,train_units,validation_units,train_rows,validation_rows,train_sequence_samples,validation_sequence_samples
+FD001,random_forest,16.76465976881664,11.754557569296377,35870.056056891524,,,80,20,16379,3752,,
