@@ -46,11 +46,17 @@ git push -u origin main
 
 The repository includes a `Dockerfile` and `render.yaml` already configured.
 
+### Model hosting (GitHub Release)
+
+Upload `models/fd001_random_forest_baseline.joblib` as a Release asset and copy the direct URL.
+Set `CMAPSS_BASELINE_MODEL_URL` to that URL in Render (Environment tab).
+
 1. Push the repo to GitHub.
 2. In Render, create a new Web Service and connect the repo.
 3. Render should detect the Dockerfile automatically.
 4. Keep `PORT=8000` and `healthCheckPath: /health` (already set in `render.yaml`).
-5. Deploy.
+5. Add `CMAPSS_BASELINE_MODEL_URL` pointing to the Release asset.
+6. Deploy.
 
 ### Verify after deploy
 

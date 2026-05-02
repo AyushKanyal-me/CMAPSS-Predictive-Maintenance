@@ -94,6 +94,7 @@ Notes:
 - Provide at least 6 cycles to satisfy lag features (`1,3,5`).
 - For stable rolling statistics, send 30+ cycles (window size `30`).
 - Override defaults with `CMAPSS_BASELINE_MODEL`, `CMAPSS_ROLLING_WINDOWS`, and `CMAPSS_LAG_STEPS`.
+- If the model file is not present, set `CMAPSS_BASELINE_MODEL_URL` to a GitHub Release asset URL.
 
 ### Docker
 Build and run the containerized API:

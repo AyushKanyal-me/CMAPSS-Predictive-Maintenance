@@ -23,5 +23,10 @@ data/raw/
 data/processed/
 mlruns/
 
+# Model binaries (download at runtime)
+models/*.joblib
+models/*.pt
+models/*.pth
+
 # Logs
 *.log

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import os
+import shutil
+import urllib.request
 from functools import lru_cache
 from pathlib import Path
 
@@ -20,6 +22,7 @@ DEFAULT_LAG_STEPS = (1, 3, 5)
 
 MODEL_NAME = os.getenv("CMAPSS_MODEL_NAME", "fd001_random_forest_baseline")
 MODEL_PATH = Path(os.getenv("CMAPSS_BASELINE_MODEL", str(DEFAULT_MODEL_PATH)))
+MODEL_URL = os.getenv("CMAPSS_BASELINE_MODEL_URL", "")
 
 
 def _parse_int_tuple(value: str, fallback: tuple[int, ...]) -> tuple[int, ...]:
@@ -88,10 +91,26 @@ app = FastAPI(title="C-MAPSS RUL API", version="0.1.0")
 @lru_cache(maxsize=1)
 def _load_model():
     if not MODEL_PATH.exists():
-        raise FileNotFoundError(
-            f"Baseline model not found at '{MODEL_PATH}'. Set CMAPSS_BASELINE_MODEL to override."
-        )
+        if MODEL_URL:
+            _download_model(MODEL_URL, MODEL_PATH)
+        if not MODEL_PATH.exists():
+            raise FileNotFoundError(
+                "Baseline model not found. "
+                f"Set CMAPSS_BASELINE_MODEL or CMAPSS_BASELINE_MODEL_URL. (Path: '{MODEL_PATH}')."
+            )
     return joblib.load(MODEL_PATH)
+
+
+def _download_model(url: str, destination: Path) -> None:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = destination.with_suffix(destination.suffix + ".tmp")
+    try:
+        with urllib.request.urlopen(url) as response, open(tmp_path, "wb") as handle:
+            shutil.copyfileobj(response, handle)
+        tmp_path.replace(destination)
+    finally:
+        if tmp_path.exists():
+            tmp_path.unlink()
 
 
 def _records_to_frame(unit_id: int, records: list[SensorRecord]) -> pd.DataFrame:
