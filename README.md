@@ -190,14 +190,12 @@ MLflow tracking:
 
 ## Documentation and Reports
 
-- Implementation plan: [implementation_plan.md](implementation_plan.md)
 - Phase 3 notebook: [notebooks/03_training_and_evaluation.ipynb](notebooks/03_training_and_evaluation.ipynb)
 - Phase 4 full summary: [reports/phase4_multi_dataset_summary.csv](reports/phase4_multi_dataset_summary.csv)
 - Phase 4 full JSON: [reports/phase4_multi_dataset_summary.json](reports/phase4_multi_dataset_summary.json)
 - Phase 4 run metadata: [reports/phase4_run_metadata.json](reports/phase4_run_metadata.json)
 - Phase 4 smoke summary: [reports/smoke_phase4/phase4_multi_dataset_summary.csv](reports/smoke_phase4/phase4_multi_dataset_summary.csv)
 - Phase 4 smoke JSON: [reports/smoke_phase4/phase4_multi_dataset_summary.json](reports/smoke_phase4/phase4_multi_dataset_summary.json)
-- Deployment guide: [DEPLOYMENT.md](DEPLOYMENT.md)
 - Colab GPU handoff: [docs/phase4_colab_gpu_handoff.md](docs/phase4_colab_gpu_handoff.md)
 - Colab results template: [reports/colab_gpu_results.md](reports/colab_gpu_results.md)
 - Final test run report: [reports/final_test_run.md](reports/final_test_run.md)
