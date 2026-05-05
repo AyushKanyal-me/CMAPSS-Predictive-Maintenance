@@ -1,13 +1,20 @@
 # NASA C-MAPSS Predictive Maintenance
 
-I built an end-to-end predictive maintenance system for turbofan engines using the NASA C-MAPSS dataset. The project focuses on production-ready feature engineering, leakage-safe evaluation, and a deployed baseline model served through a FastAPI API. I kept the work reproducible with MLflow tracking, unit tests, and a repeatable benchmark runner across FD001 to FD004.
+End-to-end predictive maintenance system for turbofan engines using the NASA C-MAPSS dataset, built with production-ready feature engineering, leakage-safe evaluation, and a deployed FastAPI inference service.
+
+| Result set | Dataset | RMSE | MAE | NASA Score | Live API |
+| --- | --- | --- | --- | --- | --- |
+| Random Forest pipeline (safe profile) | FD001 | 16.66 | 11.74 | 33564.97 | https://cmapss-predictive-maintenance.onrender.com/docs |
+| Random Forest pipeline (safe profile) | FD002 | 19.59 | 15.05 | 144504.91 | https://cmapss-predictive-maintenance.onrender.com/docs |
+| Random Forest pipeline (safe profile) | FD003 | 13.33 | 8.78 | 27589.47 | https://cmapss-predictive-maintenance.onrender.com/docs |
+| Random Forest pipeline (safe profile) | FD004 | 20.16 | 14.25 | 394994.36 | https://cmapss-predictive-maintenance.onrender.com/docs |
 
 ## Highlights
 
 - Rolling statistics and lag features engineered per engine to avoid data leakage.
-- Baseline Random Forest model deployed behind a FastAPI endpoint and Dockerized for cloud hosting.
+- Random Forest pipeline deployed behind a FastAPI endpoint and Dockerized for cloud hosting.
 - Multi-dataset benchmark runner with consistent settings and report artifacts.
-- MLflow tracking for experiment provenance and metrics.
+- MLflow tracking and pytest coverage for reproducibility.
 
 ## Engineering Decisions
 
@@ -23,18 +30,9 @@ I train with RMSE but report the NASA scoring function because late predictions 
 ### 4. Leakage-safe validation
 I split by engine ID rather than shuffling rows. Each engine in the validation set is unseen during training, which preserves temporal integrity.
 
-## Results Summary
+## Reproducibility
 
-- Baseline (Random Forest, FD001): RMSE 16.69, MAE 11.74, NASA Score 33798.30
-- Phase 4 multi-dataset benchmark (Random Forest, safe profile)
-  - FD001: RMSE 16.66, MAE 11.74, NASA Score 33564.97
-  - FD002: RMSE 19.59, MAE 15.05, NASA Score 144504.91
-  - FD003: RMSE 13.33, MAE 8.78, NASA Score 27589.47
-  - FD004: RMSE 20.16, MAE 14.25, NASA Score 394994.36
-
-MLflow tracking:
-- Experiment: cmapss_phase3_modeling
-- Run ID: f0aa0549e4b549a0b34856f5b5c3e72b
+I log experiments with MLflow and track model performance across datasets. Unit tests cover feature engineering, metrics, and pipeline behavior to keep regressions out of the training and scoring flow.
 
 ## Project Structure
 
@@ -44,7 +42,7 @@ MLflow tracking:
 ├── src/                # Pipeline source code
 │   ├── data/           # Ingestion and RUL logic
 │   ├── features/       # Rolling and lag feature engineering
-│   ├── models/         # Baseline and LSTM training code
+│   ├── models/         # Random Forest and LSTM training code
 │   └── evaluation/     # Metrics and scoring
 ├── reports/            # Benchmark outputs and metadata
 └── models/             # Local model artifacts (downloaded in deployment)
@@ -112,7 +110,7 @@ Render quickstart:
 
 ## Benchmarks
 
-Run the multi-dataset benchmark (baseline only):
+Run the multi-dataset benchmark (Random Forest only):
 
 ```bash
 python -m src.pipeline.multi_dataset_benchmark \
