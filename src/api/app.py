@@ -127,7 +127,10 @@ def _records_to_frame(unit_id: int, records: list[SensorRecord]) -> pd.DataFrame
     return df.reset_index(drop=True)
 
 
-def _build_feature_frame(df: pd.DataFrame) -> tuple[pd.DataFrame, list[str], int]:
+def _build_feature_frame(
+    df: pd.DataFrame,
+    expected_feature_names: list[str] | None = None,
+) -> tuple[pd.DataFrame, list[str], int]:
     sensor_cols = [col for col in SENSOR_COLUMNS if col not in RECOMMENDED_DROPPED_SENSORS]
 
     rolling_df = build_rolling_features(
@@ -147,12 +150,22 @@ def _build_feature_frame(df: pd.DataFrame) -> tuple[pd.DataFrame, list[str], int
         )
 
     rolling_feature_cols = [col for col in rolling_df.columns if "_roll_" in col or "_lag_" in col]
-    if not rolling_feature_cols:
-        raise ValueError("No rolling features were generated from the provided records.")
+    if expected_feature_names:
+        feature_cols = list(expected_feature_names)
+        missing = [col for col in feature_cols if col not in rolling_df.columns]
+        if missing:
+            raise ValueError(
+                "Model expects features not present in request data: "
+                f"{missing}."
+            )
+    else:
+        if not rolling_feature_cols:
+            raise ValueError("No rolling features were generated from the provided records.")
+        feature_cols = rolling_feature_cols
 
     latest_row = rolling_df.sort_values("cycle").iloc[-1]
-    feature_frame = latest_row[rolling_feature_cols].to_frame().T
-    return feature_frame, rolling_feature_cols, int(latest_row["cycle"])
+    feature_frame = latest_row[feature_cols].to_frame().T
+    return feature_frame, feature_cols, int(latest_row["cycle"])
 
 
 @app.get("/health")
@@ -169,12 +182,21 @@ def predict_baseline(request: PredictRequest) -> PredictResponse:
 
     df = _records_to_frame(request.unit_id, request.records)
 
+    expected_feature_names = getattr(model, "feature_names_in_", None)
+    if expected_feature_names is not None:
+        expected_feature_names = list(expected_feature_names)
+
     try:
-        feature_frame, feature_cols, cycle = _build_feature_frame(df)
+        feature_frame, feature_cols, cycle = _build_feature_frame(
+            df,
+            expected_feature_names=expected_feature_names,
+        )
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     expected_features = getattr(model, "n_features_in_", None)
+    if expected_feature_names is not None:
+        expected_features = len(expected_feature_names)
     if expected_features is not None and expected_features != len(feature_cols):
         raise HTTPException(
             status_code=500,
