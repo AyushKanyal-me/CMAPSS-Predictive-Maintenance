@@ -2,12 +2,14 @@
 
 End-to-end predictive maintenance system for turbofan engines using the NASA C-MAPSS dataset, built with production-ready feature engineering, leakage-safe evaluation, and a deployed FastAPI inference service.
 
-| Result set | Dataset | RMSE | MAE | NASA Score | Live API |
-| --- | --- | --- | --- | --- | --- |
-| Random Forest pipeline (safe profile) | FD001 | 16.66 | 11.74 | 33564.97 | https://cmapss-predictive-maintenance.onrender.com/docs |
-| Random Forest pipeline (safe profile) | FD002 | 19.59 | 15.05 | 144504.91 | https://cmapss-predictive-maintenance.onrender.com/docs |
-| Random Forest pipeline (safe profile) | FD003 | 13.33 | 8.78 | 27589.47 | https://cmapss-predictive-maintenance.onrender.com/docs |
-| Random Forest pipeline (safe profile) | FD004 | 20.16 | 14.25 | 394994.36 | https://cmapss-predictive-maintenance.onrender.com/docs |
+**Live API:** [Swagger UI](https://cmapss-predictive-maintenance.onrender.com/docs)
+
+| Result set | Dataset | RMSE | MAE | NASA Score |
+| --- | --- | --- | --- | --- |
+| Random Forest pipeline (safe profile) | FD001 | 16.66 | 11.74 | 33564.97 |
+| Random Forest pipeline (safe profile) | FD002 | 19.59 | 15.05 | 144504.91 |
+| Random Forest pipeline (safe profile) | FD003 | 13.33 | 8.78 | 27589.47 |
+| Random Forest pipeline (safe profile) | FD004 | 20.16 | 14.25 | 394994.36 |
 
 ## Highlights
 
@@ -17,11 +19,6 @@ End-to-end predictive maintenance system for turbofan engines using the NASA C-M
 - MLflow tracking and pytest coverage for reproducibility.
 
 ## Model Diagnostics
-
-These diagnostics summarize how the FD001 Random Forest model behaves on a unit-wise validation split:
-- Actual vs predicted scatter with a 1:1 reference line to spot bias and spread.
-- Feature importance bar chart (top 15) to surface the strongest engineered signals.
-- Sensor degradation curve for a representative unit to show the raw trend the model is learning from.
 
 ![FD001 diagnostics](reports/figures/diagnostic_plots_fd001.png)
 
@@ -112,10 +109,7 @@ docker run -p 8000:8000 cmapss-rul-api
 The container is ready for any Docker-compatible host. Render configuration lives in [render.yaml](render.yaml).
 
 Render quickstart:
-1. Push the repo to GitHub.
-2. Create a Render Web Service connected to the repo.
-3. Render detects the Dockerfile and exposes port 8000.
-4. Verify the health endpoint at https://<your-service>/health.
+Deployed on Render via Docker. See [render.yaml](render.yaml).
 
 ## Benchmarks
 
@@ -139,12 +133,6 @@ Outputs are written to the reports directory:
 pytest
 ```
 
-## Documentation and Reports
+## Notebook
 
 - Phase 3 notebook: [notebooks/03_training_and_evaluation.ipynb](notebooks/03_training_and_evaluation.ipynb)
-- Phase 4 summary CSV: [reports/phase4_multi_dataset_summary.csv](reports/phase4_multi_dataset_summary.csv)
-- Phase 4 summary JSON: [reports/phase4_multi_dataset_summary.json](reports/phase4_multi_dataset_summary.json)
-- Phase 4 metadata: [reports/phase4_run_metadata.json](reports/phase4_run_metadata.json)
-- Colab handoff notes: [docs/phase4_colab_gpu_handoff.md](docs/phase4_colab_gpu_handoff.md)
-- Colab results template: [reports/colab_gpu_results.md](reports/colab_gpu_results.md)
-- Portfolio checklist: [docs/portfolio_readiness.md](docs/portfolio_readiness.md)
