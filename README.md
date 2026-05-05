@@ -16,6 +16,10 @@ End-to-end predictive maintenance system for turbofan engines using the NASA C-M
 - Multi-dataset benchmark runner with consistent settings and report artifacts.
 - MLflow tracking and pytest coverage for reproducibility.
 
+## Model Diagnostics
+
+![FD001 diagnostics](reports/figures/diagnostic_plots_fd001.png)
+
 ## Engineering Decisions
 
 ### 1. Piecewise RUL capping
