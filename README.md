@@ -18,6 +18,11 @@ End-to-end predictive maintenance system for turbofan engines using the NASA C-M
 
 ## Model Diagnostics
 
+These diagnostics summarize how the FD001 Random Forest model behaves on a unit-wise validation split:
+- Actual vs predicted scatter with a 1:1 reference line to spot bias and spread.
+- Feature importance bar chart (top 15) to surface the strongest engineered signals.
+- Sensor degradation curve for a representative unit to show the raw trend the model is learning from.
+
 ![FD001 diagnostics](reports/figures/diagnostic_plots_fd001.png)
 
 ## Engineering Decisions
